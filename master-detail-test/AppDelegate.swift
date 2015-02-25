@@ -22,25 +22,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var managedDocument: UIManagedDocument? {
         didSet {
-            
+//            if(self.managedDocument.documentState == UIDocumentStateNormal){
+//                self.managedObjectContext = self.managedDocument.managedObjectContext;
+//                
+//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextChanged:) name: NSManagedObjectContextObjectsDidChangeNotification object:self.managedObjectContext];
+//                
+//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextSaved:) name: NSManagedObjectContextDidSaveNotification object:self.managedObjectContext];
+//                
+//                NSLog(@"INFO - database is %@/%@", [self.managedDocument.fileURL.absoluteString stringByRemovingPercentEncoding], @"StoreContent/persistentStore");
+//            }else{
+//                
+//                NSString *documentState;
+//                switch (self.managedDocument.documentState) {
+//                case UIDocumentStateNormal:
+//                    documentState = @"UIDocumentStateNormal";
+//                    break;
+//                case UIDocumentStateClosed:
+//                    documentState = @"UIDocumentStateNormal";
+//                    break;
+//                case UIDocumentStateInConflict:
+//                    documentState = @"UIDocumentStateInConflict";
+//                    break;
+//                case UIDocumentStateSavingError:
+//                    documentState = @"UIDocumentStateSavingError";
+//                    break;
+//                case UIDocumentStateEditingDisabled:
+//                    documentState = @"UIDocumentStateEditingDisabled";
+//                    break;
+//                default:
+//                    break;
+//                }
+//                NSLog(@"Document state is not normal %@, see UIDocumentState ", documentState );
+            }
         }
     }
     // MARK: Persistence
     
     private func createManagedDocument() {
-        let documentsDirectory = applicationDocumentsDirectory()
-        println("documentsDirectory = \(documentsDirectory)")
-        let documentName = "master-detail-test"
-//        let url = documentsDirectory.
+        if let documentsDirectory = applicationDocumentsDirectory() {
+            println("documentsDirectory = \(documentsDirectory)")
+            let documentName = "master-detail-test"
+            let databaseURL = documentsDirectory.URLByAppendingPathComponent(documentName)
+            println("databaseURL = \(databaseURL)")
+            
+            let managedDocument = UIManagedDocument(fileURL: databaseURL)
+            
+            if NSFileManager.defaultManager().fileExistsAtPath(databaseURL.path!){
+                managedDocument.openWithCompletionHandler( {
+                    success in
+                        if success {
+                            self.managedDocument = managedDocument
+                        }else {
+                            println("ERROR: Could not open database file")
+                        }
+                    })
+            } else {
+                managedDocument.saveToURL(databaseURL, forSaveOperation: UIDocumentSaveOperation.ForCreating, completionHandler:  {
+                    success in
+                        if success {
+                            self.managedDocument = managedDocument
+                        }else {
+                            println("ERROR: Could not create database file")
+                        }
+                    })
+            }
+        }
     }
     
-//    - (NSURL *)applicationDocumentsDirectory
-//    {
-//    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-//    }
-    private func applicationDocumentsDirectory() -> String {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
-        return documentsPath
+    private func applicationDocumentsDirectory() -> NSURL? {
+        
+        if let url = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as? NSURL {
+             return url
+        }
+        return nil
     }
     
 
