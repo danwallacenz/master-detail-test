@@ -16,12 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     var managedObjectContext: NSManagedObjectContext? {
         didSet {
-            
+            println("managedObjectContext created \(managedObjectContext)")
         }
     }
 
     var managedDocument: UIManagedDocument? {
         didSet {
+            println("managedDocument found \(managedDocument)")
+            if managedDocument?.documentState == UIDocumentState.Normal {
+                managedObjectContext = managedDocument?.managedObjectContext
+            }
 //            if(self.managedDocument.documentState == UIDocumentStateNormal){
 //                self.managedObjectContext = self.managedDocument.managedObjectContext;
 //                
@@ -53,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //                    break;
 //                }
 //                NSLog(@"Document state is not normal %@, see UIDocumentState ", documentState );
-            }
+//            }
         }
     }
     // MARK: Persistence
