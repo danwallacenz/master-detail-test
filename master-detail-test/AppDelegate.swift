@@ -14,15 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
     
-    
     // MARK: Persistence
-    var managedObjectContext: NSManagedObjectContext? {
+    private var managedObjectContext: NSManagedObjectContext? {
         didSet {
             println("managedObjectContext created \(managedObjectContext)")
+//            let userInfo = ["Context": managedObjectContext]
+            NSNotificationCenter.defaultCenter().postNotificationName("DatabaseAvailabilityNotification", object: managedObjectContext)
         }
     }
 
-    var managedDocument: UIManagedDocument? {
+    private var managedDocument: UIManagedDocument? {
         didSet {
             if managedDocument != nil {
                 println("managedDocument found \(managedDocument)")

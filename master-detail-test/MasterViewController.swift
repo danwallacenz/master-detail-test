@@ -7,18 +7,34 @@
 //
 
 import UIKit
+import CoreData
 
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
     var objects = NSMutableArray()
 
+    // MARK: Persistence
+    private var managedObjectContext: NSManagedObjectContext? {
+        didSet {
+            println("managedObjectContext created in MasterViewController \(managedObjectContext)")
+
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
+        }
+        
+//        NSNotificationCenter.defaultCenter().addObserverForName("DatabaseAvailabilityNotification", object: nil, queue: nil, usingBlock: 
+        NSNotificationCenter.defaultCenter().addObserverForName("DatabaseAvailabilityNotification", object: nil, queue: nil) { notification in
+            if let managedObjectContext = notification.object as? NSManagedObjectContext {
+               self.managedObjectContext = managedObjectContext
+                NSNotificationCenter.defaultCenter().removeObserver(self, name:"DatabaseAvailabilityNotification", object: nil )
+            }
         }
     }
 
