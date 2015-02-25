@@ -7,19 +7,54 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
+    
+    var managedObjectContext: NSManagedObjectContext? {
+        didSet {
+            
+        }
+    }
 
+    var managedDocument: UIManagedDocument? {
+        didSet {
+            
+        }
+    }
+    // MARK: Persistence
+    
+    private func createManagedDocument() {
+        let documentsDirectory = applicationDocumentsDirectory()
+        println("documentsDirectory = \(documentsDirectory)")
+        let documentName = "master-detail-test"
+//        let url = documentsDirectory.
+    }
+    
+//    - (NSURL *)applicationDocumentsDirectory
+//    {
+//    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+//    }
+    private func applicationDocumentsDirectory() -> String {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        return documentsPath
+    }
+    
 
+    
+    // MARK: UIApplicationDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
         navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
+        
+        createManagedDocument()
+        
         return true
     }
 
