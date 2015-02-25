@@ -97,19 +97,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     func contextChanged(notification: NSNotification){
-        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
-            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in memory)")
-            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in memory)")
-            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in memory)")
+        if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? NSSet {
+            println("\(insertedObjects.count) objects inserted (in memory)")
         }
+        if let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as? NSSet {
+            println("\(deletedObjects.count) objects deleted (in memory)")
+        }
+        if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? NSSet {
+            println("\(updatedObjects.count) objects updated (in memory)")
+        }
+//        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
+//            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in memory)")
+//            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in memory)")
+//            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in memory)")
+//        }
     }
 
     func contextSaved(notification: NSNotification){
-        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
-            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in database)")
-            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in database)")
-            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in database)")
+        if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? NSSet {
+            println("\(insertedObjects.count) objects inserted (in database)")
         }
+        if let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as? NSSet {
+            println("\(deletedObjects.count) objects deleted (in database)")
+        }
+        if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? NSSet {
+            println("\(updatedObjects.count) objects updated (in database)")
+        }
+//        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
+//            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in database)")
+//            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in database)")
+//            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in database)")
+//        }
     }
     
     
@@ -153,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
         if let secondaryAsNavController = secondaryViewController as? UINavigationController {
             if let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController {
-                if topAsDetailController.detailItem == nil {
+                if topAsDetailController.report == nil {
                     // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
                     return true
                 }

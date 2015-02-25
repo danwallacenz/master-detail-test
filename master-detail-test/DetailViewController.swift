@@ -13,21 +13,43 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
 
-    var detailItem: AnyObject? {
+//    var detailItem: AnyObject? {
+//        didSet {
+//            // Update the view.
+//            self.configureView()
+//        }
+//    }
+    
+    var report: Report? {
         didSet {
             // Update the view.
             self.configureView()
         }
     }
 
+    private var dateFormatter: NSDateFormatter {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
+        return dateFormatter
+    }
+    
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail: AnyObject = self.detailItem {
+        if let report: Report = self.report {
             if let label = self.detailDescriptionLabel {
-                label.text = detail.description
+                label.text = dateFormatter.stringFromDate(report.creationDate)
             }
         }
     }
+//    func configureView() {
+//        // Update the user interface for the detail item.
+//        if let detail: AnyObject = self.detailItem {
+//            if let label = self.detailDescriptionLabel {
+//                label.text = detail.description
+//            }
+//        }
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
