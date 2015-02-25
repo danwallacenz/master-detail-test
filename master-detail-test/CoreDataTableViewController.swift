@@ -33,7 +33,6 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
             } else {
                 tableView.reloadData()
             }
-            
         }
     }
     
@@ -96,7 +95,7 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
         if let sectionInfo = fetchedResultsController?.sections![section] as? NSFetchedResultsSectionInfo {
             return sectionInfo.name
         }
-        return "??"
+        return nil
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {

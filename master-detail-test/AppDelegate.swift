@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return nil
     }
     
-    private func contextChanged(notification: NSNotification){
+    func contextChanged(notification: NSNotification){
         if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
             println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in memory)")
             println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in memory)")
@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
     }
 
-    private func contextSaved(notification: NSNotification){
+    func contextSaved(notification: NSNotification){
         if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
             println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in database)")
             println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in database)")

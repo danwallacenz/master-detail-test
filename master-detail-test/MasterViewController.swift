@@ -14,11 +14,24 @@ class MasterViewController: CoreDataTableViewController {
     var detailViewController: DetailViewController? = nil
     var objects = NSMutableArray()
 
+    private var addButton: UIBarButtonItem {
+        return UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+    }
+
+    private var dateFormatter: NSDateFormatter {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
+        return dateFormatter
+    }
+    
     // MARK: Persistence
     private var managedObjectContext: NSManagedObjectContext? {
         didSet {
             println("managedObjectContext created in MasterViewController \(managedObjectContext)")
 
+            self.navigationItem.rightBarButtonItem = addButton
+            
             let fetchRequest = NSFetchRequest(entityName: "Report")
             fetchRequest.predicate = nil
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "creationDate",
@@ -57,8 +70,9 @@ class MasterViewController: CoreDataTableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+//        self.navigationItem.rightBarButtonItem = addButton
+        
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
@@ -71,9 +85,12 @@ class MasterViewController: CoreDataTableViewController {
     }
 
     func insertNewObject(sender: AnyObject) {
-        objects.insertObject(NSDate(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+//        objects.insertObject(NSDate(), atIndex: 0)
+//        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+//        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        
+        let report = Report.createInManagedObjectContext(managedObjectContext!)
+        println("report=\(report.description)")
     }
 
     // MARK: - Segues
@@ -97,7 +114,14 @@ class MasterViewController: CoreDataTableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+//        return objects.count
+        var rows = 0
+        if fetchedResultsController?.sections?.count > 0 {
+            var sectionInfo = fetchedResultsController!.sections?[section] as NSFetchedResultsSectionInfo
+            rows = sectionInfo.numberOfObjects
+        }
+        return rows
+        
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -105,8 +129,12 @@ class MasterViewController: CoreDataTableViewController {
         
 //        USE fetchedResultsController?.objectAtIndexPath(indexPath)
         
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel!.text = object.description
+        if let report = fetchedResultsController?.objectAtIndexPath(indexPath) as? Report {
+            cell.textLabel!.text = dateFormatter.stringFromDate(report.creationDate)
+        }
+        
+//        let object = objects[indexPath.row] as NSDate
+//        cell.textLabel!.text = object.description
         return cell
     }
 

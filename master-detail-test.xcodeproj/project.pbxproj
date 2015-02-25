@@ -16,6 +16,11 @@
 		CB38A86E1A9D5D2300CF4F56 /* master_detail_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB38A86D1A9D5D2300CF4F56 /* master_detail_testTests.swift */; };
 		CBDFC0EA1A9DCCB200255015 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0E91A9DCCB200255015 /* CoreDataTableViewController.swift */; };
 		CBDFC0ED1A9E06DD00255015 /* Model.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0EC1A9E06DD00255015 /* Model.xcdatamodel */; };
+		CBDFC0EF1A9E0BA700255015 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0EE1A9E0BA700255015 /* FormData.swift */; };
+		CBDFC0F11A9E0BA700255015 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0F01A9E0BA700255015 /* Locations.swift */; };
+		CBDFC0F31A9E0BA700255015 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0F21A9E0BA700255015 /* Report.swift */; };
+		CBDFC0F51A9E0BA800255015 /* PhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0F41A9E0BA800255015 /* PhotoAlbum.swift */; };
+		CBDFC0F71A9E550000255015 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0F61A9E550000255015 /* ModelExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +47,11 @@
 		CB38A86D1A9D5D2300CF4F56 /* master_detail_testTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = master_detail_testTests.swift; sourceTree = "<group>"; };
 		CBDFC0E91A9DCCB200255015 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		CBDFC0EC1A9E06DD00255015 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CBDFC0EE1A9E0BA700255015 /* FormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormData.swift; sourceTree = "<group>"; };
+		CBDFC0F01A9E0BA700255015 /* Locations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
+		CBDFC0F21A9E0BA700255015 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		CBDFC0F41A9E0BA800255015 /* PhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbum.swift; sourceTree = "<group>"; };
+		CBDFC0F61A9E550000255015 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +135,11 @@
 			isa = PBXGroup;
 			children = (
 				CBDFC0EC1A9E06DD00255015 /* Model.xcdatamodel */,
+				CBDFC0F41A9E0BA800255015 /* PhotoAlbum.swift */,
+				CBDFC0F21A9E0BA700255015 /* Report.swift */,
+				CBDFC0F01A9E0BA700255015 /* Locations.swift */,
+				CBDFC0EE1A9E0BA700255015 /* FormData.swift */,
+				CBDFC0F61A9E550000255015 /* ModelExtensions.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -230,10 +245,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB38A85A1A9D5D2300CF4F56 /* DetailViewController.swift in Sources */,
+				CBDFC0F71A9E550000255015 /* ModelExtensions.swift in Sources */,
 				CBDFC0ED1A9E06DD00255015 /* Model.xcdatamodel in Sources */,
 				CB38A8581A9D5D2300CF4F56 /* MasterViewController.swift in Sources */,
+				CBDFC0F31A9E0BA700255015 /* Report.swift in Sources */,
+				CBDFC0F11A9E0BA700255015 /* Locations.swift in Sources */,
+				CBDFC0F51A9E0BA800255015 /* PhotoAlbum.swift in Sources */,
 				CBDFC0EA1A9DCCB200255015 /* CoreDataTableViewController.swift in Sources */,
 				CB38A8561A9D5D2300CF4F56 /* AppDelegate.swift in Sources */,
+				CBDFC0EF1A9E0BA700255015 /* FormData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
