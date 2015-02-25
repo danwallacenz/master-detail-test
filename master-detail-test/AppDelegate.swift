@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
     
+    
+    // MARK: Persistence
     var managedObjectContext: NSManagedObjectContext? {
         didSet {
             println("managedObjectContext created \(managedObjectContext)")
@@ -22,45 +24,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var managedDocument: UIManagedDocument? {
         didSet {
-            println("managedDocument found \(managedDocument)")
-            if managedDocument?.documentState == UIDocumentState.Normal {
-                managedObjectContext = managedDocument?.managedObjectContext
+            if managedDocument != nil {
+                println("managedDocument found \(managedDocument)")
+               
+                if managedDocument!.documentState == UIDocumentState.Normal {
+                   
+                    managedObjectContext = managedDocument!.managedObjectContext
+                    
+                    NSNotificationCenter.defaultCenter() .addObserver(self, selector: "contextChanged:", name: NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext)
+                    NSNotificationCenter.defaultCenter() .addObserver(self, selector: "contextSaved:", name: NSManagedObjectContextDidSaveNotification, object: self.managedObjectContext)
+                    
+                    println("Database is \(managedDocument!.fileURL.absoluteString?.stringByRemovingPercentEncoding)/StoreContent/persistentStore")
+                
+                } else { // error
+                    
+                    var documentState = ""
+                    switch managedDocument!.documentState {
+                        case UIDocumentState.Closed:
+                            documentState = "Closed"
+                        case UIDocumentState.InConflict:
+                            documentState = "InConflict"
+                        case UIDocumentState.SavingError:
+                            documentState = "SavingError"
+                        case UIDocumentState.EditingDisabled:
+                            documentState = "EditingDisabled"
+                        default: break
+                    }
+                    println("ERROR: Document state is \(documentState)")
+                }
             }
-//            if(self.managedDocument.documentState == UIDocumentStateNormal){
-//                self.managedObjectContext = self.managedDocument.managedObjectContext;
-//                
-//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextChanged:) name: NSManagedObjectContextObjectsDidChangeNotification object:self.managedObjectContext];
-//                
-//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextSaved:) name: NSManagedObjectContextDidSaveNotification object:self.managedObjectContext];
-//                
-//                NSLog(@"INFO - database is %@/%@", [self.managedDocument.fileURL.absoluteString stringByRemovingPercentEncoding], @"StoreContent/persistentStore");
-//            }else{
-//                
-//                NSString *documentState;
-//                switch (self.managedDocument.documentState) {
-//                case UIDocumentStateNormal:
-//                    documentState = @"UIDocumentStateNormal";
-//                    break;
-//                case UIDocumentStateClosed:
-//                    documentState = @"UIDocumentStateNormal";
-//                    break;
-//                case UIDocumentStateInConflict:
-//                    documentState = @"UIDocumentStateInConflict";
-//                    break;
-//                case UIDocumentStateSavingError:
-//                    documentState = @"UIDocumentStateSavingError";
-//                    break;
-//                case UIDocumentStateEditingDisabled:
-//                    documentState = @"UIDocumentStateEditingDisabled";
-//                    break;
-//                default:
-//                    break;
-//                }
-//                NSLog(@"Document state is not normal %@, see UIDocumentState ", documentState );
-//            }
         }
     }
-    // MARK: Persistence
     
     private func createManagedDocument() {
         if let documentsDirectory = applicationDocumentsDirectory() {
@@ -101,7 +95,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return nil
     }
     
+    private func contextChanged(notification: NSNotification){
+        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
+            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in memory)")
+            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in memory)")
+            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in memory)")
+        }
+    }
 
+    private func contextSaved(notification: NSNotification){
+        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
+            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in database)")
+            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in database)")
+            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in database)")
+        }
+    }
+    
     
     // MARK: UIApplicationDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
