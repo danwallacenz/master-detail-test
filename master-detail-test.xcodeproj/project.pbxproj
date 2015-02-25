@@ -14,6 +14,8 @@
 		CB38A85F1A9D5D2300CF4F56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB38A85E1A9D5D2300CF4F56 /* Images.xcassets */; };
 		CB38A8621A9D5D2300CF4F56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB38A8601A9D5D2300CF4F56 /* LaunchScreen.xib */; };
 		CB38A86E1A9D5D2300CF4F56 /* master_detail_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB38A86D1A9D5D2300CF4F56 /* master_detail_testTests.swift */; };
+		CBDFC0EA1A9DCCB200255015 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0E91A9DCCB200255015 /* CoreDataTableViewController.swift */; };
+		CBDFC0ED1A9E06DD00255015 /* Model.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = CBDFC0EC1A9E06DD00255015 /* Model.xcdatamodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		CB38A8671A9D5D2300CF4F56 /* master-detail-testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "master-detail-testTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB38A86C1A9D5D2300CF4F56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB38A86D1A9D5D2300CF4F56 /* master_detail_testTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = master_detail_testTests.swift; sourceTree = "<group>"; };
+		CBDFC0E91A9DCCB200255015 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
+		CBDFC0EC1A9E06DD00255015 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +83,10 @@
 		CB38A8521A9D5D2300CF4F56 /* master-detail-test */ = {
 			isa = PBXGroup;
 			children = (
+				CBDFC0EB1A9E06CF00255015 /* model */,
 				CB38A8551A9D5D2300CF4F56 /* AppDelegate.swift */,
 				CB38A8571A9D5D2300CF4F56 /* MasterViewController.swift */,
+				CBDFC0E91A9DCCB200255015 /* CoreDataTableViewController.swift */,
 				CB38A8591A9D5D2300CF4F56 /* DetailViewController.swift */,
 				CB38A85B1A9D5D2300CF4F56 /* Main.storyboard */,
 				CB38A85E1A9D5D2300CF4F56 /* Images.xcassets */,
@@ -113,6 +119,14 @@
 				CB38A86C1A9D5D2300CF4F56 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CBDFC0EB1A9E06CF00255015 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				CBDFC0EC1A9E06DD00255015 /* Model.xcdatamodel */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,7 +230,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB38A85A1A9D5D2300CF4F56 /* DetailViewController.swift in Sources */,
+				CBDFC0ED1A9E06DD00255015 /* Model.xcdatamodel in Sources */,
 				CB38A8581A9D5D2300CF4F56 /* MasterViewController.swift in Sources */,
+				CBDFC0EA1A9DCCB200255015 /* CoreDataTableViewController.swift in Sources */,
 				CB38A8561A9D5D2300CF4F56 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +427,7 @@
 				CB38A8731A9D5D2300CF4F56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB38A8741A9D5D2300CF4F56 /* Build configuration list for PBXNativeTarget "master-detail-testTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +436,7 @@
 				CB38A8761A9D5D2300CF4F56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

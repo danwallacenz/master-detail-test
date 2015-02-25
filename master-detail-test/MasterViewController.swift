@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController {
+class MasterViewController: CoreDataTableViewController {
 
     var detailViewController: DetailViewController? = nil
     var objects = NSMutableArray()
@@ -19,6 +19,20 @@ class MasterViewController: UITableViewController {
         didSet {
             println("managedObjectContext created in MasterViewController \(managedObjectContext)")
 
+            let fetchRequest = NSFetchRequest(entityName: "Report")
+            fetchRequest.predicate = nil
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "creationDate",
+                ascending: false,
+                selector:"compare:")]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                managedObjectContext: managedObjectContext!,
+                sectionNameKeyPath: nil,
+                cacheName: nil)
+
+//            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
+//            request.predicate = nil; // filter on name here
+//            request.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey: @"creationDate" ascending:NO selector:@selector(compare:)]]; //use localizedStandardCompare: for strings
+//            self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
         }
     }
 
@@ -88,7 +102,9 @@ class MasterViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-
+        
+//        USE fetchedResultsController?.objectAtIndexPath(indexPath)
+        
         let object = objects[indexPath.row] as NSDate
         cell.textLabel!.text = object.description
         return cell
