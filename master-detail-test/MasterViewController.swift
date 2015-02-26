@@ -150,8 +150,10 @@ class MasterViewController: CoreDataTableViewController {
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            objects.removeObjectAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//            objects.removeObjectAtIndex(indexPath.row)
+            if let reportToDelete = fetchedResultsController?.objectAtIndexPath(indexPath) as? Report {
+                managedObjectContext?.deleteObject(reportToDelete);
+            }
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }

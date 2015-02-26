@@ -18,9 +18,9 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="creationLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="creationLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="formData" maxCount="1" deletionRule="Nullify" destinationEntity="FormData" inverseName="report" inverseEntity="FormData" syncable="YES"/>
-        <relationship name="locations" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="report" inverseEntity="Locations" syncable="YES"/>
-        <relationship name="photoAlbum" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="report" inverseEntity="PhotoAlbum" syncable="YES"/>
+        <relationship name="formData" maxCount="1" deletionRule="Cascade" destinationEntity="FormData" inverseName="report" inverseEntity="FormData" syncable="YES"/>
+        <relationship name="locations" maxCount="1" deletionRule="Cascade" destinationEntity="Locations" inverseName="report" inverseEntity="Locations" syncable="YES"/>
+        <relationship name="photoAlbum" maxCount="1" deletionRule="Cascade" destinationEntity="PhotoAlbum" inverseName="report" inverseEntity="PhotoAlbum" syncable="YES"/>
     </entity>
     <elements>
         <element name="FormData" positionX="-90" positionY="-148" width="128" height="103"/>
