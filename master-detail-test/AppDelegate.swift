@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     private var managedObjectContext: NSManagedObjectContext? {
         didSet {
             println("managedObjectContext created \(managedObjectContext)")
-//            let userInfo = ["Context": managedObjectContext]
             NSNotificationCenter.defaultCenter().postNotificationName("DatabaseAvailabilityNotification", object: managedObjectContext)
         }
     }
@@ -106,11 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? NSSet {
             println("\(updatedObjects.count) objects updated (in memory)")
         }
-//        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
-//            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in memory)")
-//            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in memory)")
-//            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in memory)")
-//        }
     }
 
     func contextSaved(notification: NSNotification){
@@ -123,11 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? NSSet {
             println("\(updatedObjects.count) objects updated (in database)")
         }
-//        if let info = notification.userInfo as? Dictionary<String, Array<AnyObject>> {
-//            println("\(info[NSInsertedObjectsKey]!.count) objects inserted (in database)")
-//            println("\(info[NSUpdatedObjectsKey]!.count) objects updated (in database)")
-//            println("\(info[NSDeletedObjectsKey]!.count) objects deleted (in database)")
-//        }
     }
     
     
