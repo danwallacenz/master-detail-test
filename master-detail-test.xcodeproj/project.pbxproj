@@ -96,11 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				CBDFC0EB1A9E06CF00255015 /* model */,
-				CB38A8551A9D5D2300CF4F56 /* AppDelegate.swift */,
-				CB38A8571A9D5D2300CF4F56 /* MasterViewController.swift */,
 				CBDFC0E91A9DCCB200255015 /* CoreDataTableViewController.swift */,
 				CB5DBBA71A9ECAF3008CCA22 /* ManagedObjectContextFactory.swift */,
-				CB38A8591A9D5D2300CF4F56 /* DetailViewController.swift */,
+				CB38A8551A9D5D2300CF4F56 /* AppDelegate.swift */,
+				CB5DBBA91A9F1865008CCA22 /* View Controllers */,
 				CB38A85B1A9D5D2300CF4F56 /* Main.storyboard */,
 				CB38A85E1A9D5D2300CF4F56 /* Images.xcassets */,
 				CB38A8601A9D5D2300CF4F56 /* LaunchScreen.xib */,
@@ -132,6 +131,15 @@
 				CB38A86C1A9D5D2300CF4F56 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB5DBBA91A9F1865008CCA22 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CB38A8571A9D5D2300CF4F56 /* MasterViewController.swift */,
+				CB38A8591A9D5D2300CF4F56 /* DetailViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		CBDFC0EB1A9E06CF00255015 /* model */ = {

@@ -110,9 +110,24 @@ class MasterViewController: CoreDataTableViewController {
         if editingStyle == .Delete {
             if let reportToDelete = fetchedResultsController?.objectAtIndexPath(indexPath) as? Report {
                 managedObjectContext?.deleteObject(reportToDelete);
+                
+                // handle the case when there is no more reports or the displayed row is the one being deleted
+                resetDetailControllerIfNeededForDeletionOfRowAtIndexPath(indexPath)
             }
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
+    
+    private func resetDetailControllerIfNeededForDeletionOfRowAtIndexPath(indexPath: NSIndexPath){
+        if splitViewController != nil {
+            if let detailNavigationController = splitViewController!.viewControllers[splitViewController!.viewControllers.count-1] as? UINavigationController {
+                if let detailController = detailNavigationController.topViewController as? DetailViewController {
+                    if fetchedResultsController?.fetchedObjects?.count == 1 || detailController.report == fetchedResultsController?.objectAtIndexPath(indexPath) as? Report{
+                        detailController.detailDescriptionLabel.text = "Detail view content goes here"
+                    }
+                }
+            }
         }
     }
 }
