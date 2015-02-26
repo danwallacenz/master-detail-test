@@ -17,9 +17,9 @@ class ManagedObjectContextFactory: NSObject {
         self.documentName = documentName
     }
     
-//    convenience init() {
-//        self.init(documentName: "Reports")
-//    }
+    override convenience init() {
+        self.init(documentName: "Reports")
+    }
     
     // MARK: Persistence
     var managedObjectContext: NSManagedObjectContext? {
