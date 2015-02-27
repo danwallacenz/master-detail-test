@@ -39,7 +39,7 @@ class MasterViewController: CoreDataTableViewController {
                 selector:"compare:")]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                 managedObjectContext: managedObjectContext!,
-                sectionNameKeyPath: nil,
+                sectionNameKeyPath: "sectionIdentifier",
                 cacheName: nil)
         }
     }
@@ -101,6 +101,19 @@ class MasterViewController: CoreDataTableViewController {
         return cell
     }
 
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sectionInfo = fetchedResultsController?.sections![section] as? NSFetchedResultsSectionInfo {
+            
+            let numericSection = 
+            
+            
+            
+            
+            return sectionInfo.name
+        }
+        return nil
+    }
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
