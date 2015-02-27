@@ -45,7 +45,7 @@ class MasterViewController: CoreDataTableViewController {
                 selector:"compare:")]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                 managedObjectContext: managedObjectContext!,
-                sectionNameKeyPath: "sectionIdentifier",
+                sectionNameKeyPath:  "sectionIdentifier",
                 cacheName: nil)
         }
     }
@@ -114,20 +114,15 @@ class MasterViewController: CoreDataTableViewController {
                 let year = numericSection/10000
                 let month = (numericSection / 100) % 100
                 let day =  numericSection % 100
-//                println("\(year)")
-//                println("\(month)")
-//                println("\(day)")
-                
                 let dateComponents = NSDateComponents()
                 dateComponents.year = year
                 dateComponents.month = month
                 dateComponents.day = day
-                
+
                 if let sectionDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents) {
                     return sectionHeaderDateFormatter.stringFromDate(sectionDate)
                 }
             }
-            return sectionInfo.name
         }
         return nil
     }
