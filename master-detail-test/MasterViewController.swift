@@ -28,7 +28,6 @@ class MasterViewController: CoreDataTableViewController {
     private var sectionHeaderDateFormatter: NSDateFormatter {
         let sectionHeaderDateFormatter = NSDateFormatter()
         sectionHeaderDateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
-//        sectionHeaderDateFormatter.dateFormat = ""
         return sectionHeaderDateFormatter
     }
     
