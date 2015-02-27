@@ -25,6 +25,12 @@ class MasterViewController: CoreDataTableViewController {
         return dateFormatter
     }
     
+    private var sectionHeaderDateFormatter: NSDateFormatter {
+        let sectionHeaderDateFormatter = NSDateFormatter()
+        sectionHeaderDateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        return sectionHeaderDateFormatter
+    }
+    
     // MARK: Persistence
     private var managedObjectContext: NSManagedObjectContext? {
         didSet {
@@ -105,17 +111,12 @@ class MasterViewController: CoreDataTableViewController {
         if let sectionInfo = fetchedResultsController?.sections![section] as? NSFetchedResultsSectionInfo {
             
             if let numericSection = sectionInfo.name?.toInt()  {
-                
-//                NSInteger year = numericSection / 10000;
-//                NSInteger month = (numericSection / 100) % 100;
-//                NSInteger day = numericSection % 100;
-                
                 let year = numericSection/10000
                 let month = (numericSection / 100) % 100
                 let day =  numericSection % 100
-                println("\(year)")
-                println("\(month)")
-                println("\(day)")
+//                println("\(year)")
+//                println("\(month)")
+//                println("\(day)")
                 
                 let dateComponents = NSDateComponents()
                 dateComponents.year = year
@@ -123,17 +124,9 @@ class MasterViewController: CoreDataTableViewController {
                 dateComponents.day = day
                 
                 if let sectionDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents) {
-                    return dateFormatter.stringFromDate(sectionDate)
+                    return sectionHeaderDateFormatter.stringFromDate(sectionDate)
                 }
-                
-//                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-//                dateComponents.year = year;
-//                dateComponents.month = month;
-//                dateComponents.day = day;
-//                NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
-                
             }
-
             return sectionInfo.name
         }
         return nil
