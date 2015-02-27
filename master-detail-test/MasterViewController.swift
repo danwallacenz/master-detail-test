@@ -104,11 +104,36 @@ class MasterViewController: CoreDataTableViewController {
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let sectionInfo = fetchedResultsController?.sections![section] as? NSFetchedResultsSectionInfo {
             
-            let numericSection = 
-            
-            
-            
-            
+            if let numericSection = sectionInfo.name?.toInt()  {
+                
+//                NSInteger year = numericSection / 10000;
+//                NSInteger month = (numericSection / 100) % 100;
+//                NSInteger day = numericSection % 100;
+                
+                let year = numericSection/10000
+                let month = (numericSection / 100) % 100
+                let day =  numericSection % 100
+                println("\(year)")
+                println("\(month)")
+                println("\(day)")
+                
+                let dateComponents = NSDateComponents()
+                dateComponents.year = year
+                dateComponents.month = month
+                dateComponents.day = day
+                
+                if let sectionDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents) {
+                    return dateFormatter.stringFromDate(sectionDate)
+                }
+                
+//                NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+//                dateComponents.year = year;
+//                dateComponents.month = month;
+//                dateComponents.day = day;
+//                NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+                
+            }
+
             return sectionInfo.name
         }
         return nil
