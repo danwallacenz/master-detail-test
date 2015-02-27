@@ -18,6 +18,7 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="creationLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="creationLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sectionIdentifier" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <relationship name="formData" maxCount="1" deletionRule="Cascade" destinationEntity="FormData" inverseName="report" inverseEntity="FormData" syncable="YES"/>
         <relationship name="locations" maxCount="1" deletionRule="Cascade" destinationEntity="Locations" inverseName="report" inverseEntity="Locations" syncable="YES"/>
         <relationship name="photoAlbum" maxCount="1" deletionRule="Cascade" destinationEntity="PhotoAlbum" inverseName="report" inverseEntity="PhotoAlbum" syncable="YES"/>
@@ -26,6 +27,6 @@
         <element name="FormData" positionX="-90" positionY="-148" width="128" height="103"/>
         <element name="Locations" positionX="-0" positionY="-36" width="128" height="73"/>
         <element name="PhotoAlbum" positionX="-92" positionY="77" width="128" height="73"/>
-        <element name="Report" positionX="-405" positionY="-9" width="128" height="133"/>
+        <element name="Report" positionX="-405" positionY="-9" width="128" height="150"/>
     </elements>
 </model>

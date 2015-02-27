@@ -20,6 +20,16 @@ extension Report {
         report.photoAlbum = PhotoAlbum.createInManagedObjectContext(context, color: "Orange", report: report)
         return report
     }
+    
+    var sectionIdentifier: String  {
+        get {
+            let calendar = NSCalendar.currentCalendar()
+            let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self.creationDate)
+            let tmp = "\((dateComponents.year * 10000) + (dateComponents.month * 100) + dateComponents.day)"
+            return tmp
+        }
+    }
+    
 }
 
 extension Locations {
