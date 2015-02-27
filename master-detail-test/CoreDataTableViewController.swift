@@ -96,14 +96,15 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
         }
         return nil
     }
-    
+
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return fetchedResultsController?.sectionForSectionIndexTitle(title, atIndex: index) ?? 0
     }
-    
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        return fetchedResultsController?.sectionIndexTitles
-    }
+
+    // Causes a strange bug where a '2' appears in the vertical center on the right of the table view.
+//    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+//        return fetchedResultsController?.sectionIndexTitles
+//    }
 
     
     // MARK: - NSFetchedResultsControllerDelegate
